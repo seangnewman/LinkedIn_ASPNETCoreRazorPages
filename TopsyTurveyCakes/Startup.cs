@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TopsyTurvyCakes.Models;
 
 namespace TopsyTurvyCakes
 {
@@ -23,6 +24,7 @@ namespace TopsyTurvyCakes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+            services.AddScoped<IRecipesService, RecipesService>();
            
         }
 

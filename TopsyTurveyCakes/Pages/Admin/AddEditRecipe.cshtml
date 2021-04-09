@@ -1,0 +1,7 @@
+﻿@page "{id?}"
+@model TopsyTurvyCakes.Pages.Admin.AddEditRecipeModel
+@{
+    ViewData["Title"] = Model.IsNewRecipe ? "New Recipe" : "Edit Recipe";
+}
+
+<strong>Id: @Model.Id</strong>
