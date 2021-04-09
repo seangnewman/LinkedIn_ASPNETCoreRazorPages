@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +24,13 @@ namespace TopsyTurvyCakes
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+            services.AddRazorPages(options => {
+                options.Conventions.AuthorizeFolder("/Admin");
+                options.Conventions.AuthorizeFolder("/Account");
+                options.Conventions.AllowAnonymousToPage("/Account/Login");
+
+            });
             services.AddScoped<IRecipesService, RecipesService>();
            
         }
@@ -40,6 +47,8 @@ namespace TopsyTurvyCakes
                 app.UseExceptionHandler("/Error");
             }
 
+
+            app.UseAuthentication();
             app.UseStaticFiles();
 
 

@@ -27,9 +27,9 @@
             <a href="/Account/Login">Login</a> }
                         else
                         {
-                            <form method="post">
+                            <form method="post" asp-page="/Account/Login" asp-page-handler="Logout">
                                 <div class="input-group">
-                                    <span>@User.Identity.IsAuthenticated</span>
+                                    <span>@User.Identity.Name</span>
                                     <button type="submit" clsss="btn btn-link">Logout</button>
                                 </div>
                             </form>

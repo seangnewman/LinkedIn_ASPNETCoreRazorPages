@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Threading.Tasks;
 using TopsyTurvyCakes.Models;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TopsyTurvyCakes.Pages.Admin
 {
+    [Authorize]
     public class AddEditRecipeModel : PageModel
     {
         private readonly IRecipesService _recipesService;
@@ -33,6 +35,9 @@ namespace TopsyTurvyCakes.Pages.Admin
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!ModelState.IsValid)
+                return Page();
+
             var recipe = await _recipesService.FindAsync(Id.GetValueOrDefault()) ?? new Recipe();
 
             recipe.Name = Recipe.Name;
